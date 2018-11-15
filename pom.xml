@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.jw</groupId>
+  <artifactId>firstDeml</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>firstDeml Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <plugin.jetty>9.4.12.v20180830</plugin.jetty>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>firstDeml</finalName>
+       <plugins>
+        <!-- idea下jetty热部署 -->
+        <!-- configuration说明：-->
+        <!-- scanIntervalSeconds:扫描间隔时间需大于0 -->
+        <!-- webAppSourceDirectory:静态资源文件所在路径，默认${project.basedir}/src/main/webapp -->
+        <!-- contextPath:访问路径，默认/ -->
+        <!-- 复制webdefault.xml文件（在jetty安装路径的etc目录下）到项目资源目录（src/main/resources/webdefault.xml），修改useFileMappedBuffer为false
+        （不使用缓存文件，重新生成） -->
+        <!-- defaultsDescriptor:webdefault.xml所在路径 -->
+        <!-- port：运行端口 -->
+        <!-- 在maven projects中运行jetty:run，修改网页后稍等几秒再刷新 -->
+        <!-- 若无效，再按 ctrl+F9/ Build->Bulid Project后刷新网页 -->
+        <plugin>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>${plugin.jetty}</version>
+          <configuration>
+            <scanIntervalSeconds>5</scanIntervalSeconds>
+            <webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
+            <httpConnector>
+              <port>8087</port>
+            </httpConnector>
+            <webApp>
+              <contextPath>/my</contextPath>
+              <defaultsDescriptor>${project.basedir}/src/main/resources/webdefault.xml</defaultsDescriptor>
+            </webApp>
+          </configuration>
+        </plugin>
+      </plugins>
+  </build>
+</project>
